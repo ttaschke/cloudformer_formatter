@@ -2,12 +2,16 @@
 
 > Tool to improve on default CloudFormer resourcenames
 
-AWS provides the CloudFormer tool (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-cloudformer.html) to enable users to create CloudFormation templates from existing AWS resources.
-In the resulting template all resourcenames are set to the resource id, which in most cases is a meaningless random generated id. It is left to the user to manually change the resourcenames to more meaningful names.
-As the generated templates can be quite big and contain hundreds of resources this unfortunately takes a significan amount of time. Cloudformer Formatter solves this problem by automatically replacing these default generated resourcenames with more meaningful names that are based on the resource type name.
-
 * Release 1.0.0
 * Python 3.6.5
+
+### Preamble
+AWS provides the CloudFormer tool (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-cloudformer.html) to enable users to create CloudFormation templates from existing AWS resources.
+In the output of this tool all resourcenames are set to the resource id, which in most cases is a meaningless random generated id. It is left to the user to manually change the resourcenames to more meaningful names.
+As the generated templates can be quite big and contain hundreds of resources this unfortunately takes a significan amount of time. 
+
+Cloudformer Formatter solves this problem by automatically replacing these default generated resourcenames with more meaningful names that are based on the resource type name.
+
 
 ## Usage
 ```
