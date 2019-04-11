@@ -1,9 +1,13 @@
-# CloudFormer Formatter
+# CloudFormation Formatting Tools
 
-> Tool to improve on default CloudFormer resourcenames
+> Tools to help with cumbersome Cloudformation-related formatting tasks
 
-* Release 1.0.0
+* Release 1.1.0
 * Python 3.6.5
+
+# Tools
+
+## CloudFormer Formatter
 
 ### Preamble
 AWS provides the CloudFormer tool (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-cloudformer.html) to enable users to create CloudFormation templates from existing AWS resources.
@@ -13,7 +17,7 @@ As the generated templates can be quite big and contain hundreds of resources th
 Cloudformer Formatter solves this problem by automatically replacing these default generated resourcenames with more meaningful names that are based on the resource type name.
 
 
-## Usage
+### Usage
 ```
 usage: python cloudformer_formatter.py [-h] [input] [output]
 
@@ -62,6 +66,7 @@ Default output of CloudFormer tool:
 ```
 
 Converted output from CloudFormer formatter:
+
 ```
 {
   "AWSTemplateFormatVersion": "2010-09-09",
@@ -89,4 +94,113 @@ Converted output from CloudFormer formatter:
     }
   }
 }
+```
+
+## CloudFormation Params Formatter
+
+This tool converts between the JSON file used to define parameters when creating a stack using the AWS CLI and a Template Configuration JSON File used by CodePipeline to set the parameters of a stack.
+The format will be detected automatically and converted into the appropriate output format.
+
+### Usage
+
+```
+usage: cloudformation_formatter_params.py [-h] [input] [output]
+
+CloudFormer formatter - Tool to convert files between different formats used
+to set parameters for Cloudformation
+
+positional arguments:
+  input       Input JSON file
+  output      Formatted output JSON file
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+### Example
+
+#### CLI params file to Template Configuration file
+
+Input:
+
+```
+[
+  {
+    "ParameterKey": "RdsDBInstanceType",
+    "ParameterValue": "db.t2.large"
+  },
+  {
+    "ParameterKey": "RdsPort",
+    "ParameterValue": "5432"
+  },
+  {
+    "ParameterKey": "RdsDBName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "RdsUserName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "TagName",
+    "ParameterValue": "rds-prod"
+  }
+]
+```
+
+Output:
+
+```
+{
+  "Parameters": {
+    "RdsDBInstanceType": "db.t2.large",
+    "RdsPort": "5432",
+    "RdsDBName": "test",
+    "RdsUserName": "test",
+    "TagName": "rds-prod"
+  }
+}
+```
+
+#### Template Configuration File to CLI params file
+
+Input:
+
+```
+{
+  "Parameters" : {
+    "RdsDBInstanceType"           : "db.t2.large",
+    "RdsPort"                     : "5432",
+    "RdsDBName"                   : "test",
+    "RdsUserName"                 : "test",
+    "TagName"                     : "rds-prod"
+  }
+}
+```
+
+Output:
+
+```
+[
+  {
+    "ParameterKey": "RdsDBInstanceType",
+    "ParameterValue": "db.t2.large"
+  },
+  {
+    "ParameterKey": "RdsPort",
+    "ParameterValue": "5432"
+  },
+  {
+    "ParameterKey": "RdsDBName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "RdsUserName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "TagName",
+    "ParameterValue": "rds-prod"
+  }
+]
 ```

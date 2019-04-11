@@ -5,7 +5,7 @@ import argparse
 import json
 
 """
-CloudFormer formatter - Tool to improve on default CloudFormer resourcenames
+CloudFormer formatter resourcenames - Tool to improve on default CloudFormer resourcenames
 
 Replaces the default generated resourcenames that AWS' CloudFormer tool (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-cloudformer.html)
 outputs with more meaningful names that are based on the resource type

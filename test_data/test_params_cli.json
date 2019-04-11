@@ -1,0 +1,22 @@
+[
+  {
+    "ParameterKey": "RdsDBInstanceType",
+    "ParameterValue": "db.t2.large"
+  },
+  {
+    "ParameterKey": "RdsPort",
+    "ParameterValue": "5432"
+  },
+  {
+    "ParameterKey": "RdsDBName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "RdsUserName",
+    "ParameterValue": "test"
+  },
+  {
+    "ParameterKey": "TagName",
+    "ParameterValue": "rds-prod"
+  }
+]
