@@ -15,7 +15,7 @@ processed_resources = {}
 replacements = {}
 
 def main():
-    parser = argparse.ArgumentParser(description='CloudFormer formatter - Tool to improve on default CloudFormer resourcenames ')
+    parser = argparse.ArgumentParser(description='CloudFormer formatter - Tool to improve on default CloudFormer resourcenames')
     parser.add_argument('input', type=str, nargs='?',
                         help='Input JSON file ')
     parser.add_argument('output', type=str, nargs='?',
