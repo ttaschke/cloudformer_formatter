@@ -30,7 +30,7 @@ def main(args_cli):
         else: # the file is an AWS CLI param file
             output = convert_cli_to_template_config(json_data)
 
-        write_output(output, args.output)
+    write_output(output, args.output)
 
 def convert_template_config_to_cli(json_data):
     params = []

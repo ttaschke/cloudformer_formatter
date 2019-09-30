@@ -2,7 +2,7 @@ import unittest
 import cloudformation_formatter_params
 
 import json
-from unittest.mock import patch, MagicMock
+from unittest import mock
 
 TEMPLATE_CONFIG_FILE_JSON = {
     "Parameters" : {
@@ -39,18 +39,26 @@ CLI_PARAMS_FILE_JSON = [
 
 class TestCloudformationFormatterParams(unittest.TestCase):
 
-    def test_main(self):
-        # I don't care about the actual open
-        p1 = patch( "builtins.open", MagicMock() )
+    @mock.patch('cloudformation_formatter_params.write_output')
+    def test_main(self, write_output):
 
-        m = MagicMock( side_effect = [ TEMPLATE_CONFIG_FILE_JSON ] )
-        p2 = patch( "json.load", m )
+        p1 = mock.patch("builtins.open", mock.MagicMock())
+
+        m = mock.MagicMock(side_effect = [TEMPLATE_CONFIG_FILE_JSON])
+        p2 = mock.patch("json.load", m)
 
         with p1 as p_open:
             with p2 as p_json_load:
                 cloudformation_formatter_params.main(['cli_params_file','output_location.json'])
-                # todo
+                write_output.assert_called_with(CLI_PARAMS_FILE_JSON,'output_location.json')
 
+        m.side_effect = [CLI_PARAMS_FILE_JSON]
+        p2 = mock.patch( "json.load", m )
+
+        with p1 as p_open:
+            with p2 as p_json_load:
+                cloudformation_formatter_params.main(['cli_params_file','output_location.json'])
+                write_output.assert_called_with(TEMPLATE_CONFIG_FILE_JSON,'output_location.json')
 
     def test_convert_template_config_to_cli(self):
         output = cloudformation_formatter_params.convert_template_config_to_cli(TEMPLATE_CONFIG_FILE_JSON)
