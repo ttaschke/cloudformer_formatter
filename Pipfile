@@ -4,12 +4,12 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "==5.1.3"
+pytest = "==7.1.3"
 
 [packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.10"
 
 [scripts]
 unittest = "python -m pytest tests/ -v"
